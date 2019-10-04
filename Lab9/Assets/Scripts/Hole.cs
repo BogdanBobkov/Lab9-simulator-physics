@@ -5,8 +5,9 @@ using static System.Math;
 
 public class Hole : MonoBehaviour
 {
-    public Sprite spriteHole;
-    public GameObject cable;
+    public Sprite spriteHole, cablesAreRight, cablesAreWrong;
+    public SecondEnableButton secondEnableButton;
+    public GameObject cable, cablesConditionInscription;  
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
     public CabelButton cabelButton;
@@ -19,9 +20,12 @@ public class Hole : MonoBehaviour
 				    if(i % 2 == 0 && CabelButton.freeCableEnds[i+1] == true || i % 2 == 1 && CabelButton.freeCableEnds[i-1])
 				    Destroy(cabelButton.cables[i/2]);
 			    }
-		    GetComponent<SpriteRenderer>().sprite = spriteHole; 
-	    }
+		    GetComponent<SpriteRenderer>().sprite = spriteHole;
+            if (secondEnableButton.checkCables() == true) cablesConditionInscription.GetComponent<SpriteRenderer>().sprite = cablesAreRight;
+            else cablesConditionInscription.GetComponent<SpriteRenderer>().sprite = cablesAreWrong;
+        }
         if (Input.GetMouseButtonDown(0) && EnableButton.conditionButton == false)
+        {
             if (CursorClick.cursorTexture == true && GetComponent<SpriteRenderer>().sprite == spriteHole)
             {
                 GetComponent<SpriteRenderer>().sprite = cabelButton.cableEnds[CabelButton.currentEnd];
@@ -41,6 +45,7 @@ public class Hole : MonoBehaviour
                         CabelButton.freeCableEnds[CabelButton.currentEnd] = true;
                         Cursor.SetCursor(cabelButton.TextureCableEnds[CabelButton.currentEnd], Vector2.zero, cursorMode);
                     }
+                    cablesConditionInscription.GetComponent<SpriteRenderer>().sprite = cablesAreWrong;
                 }
                 else
                 {
@@ -50,8 +55,11 @@ public class Hole : MonoBehaviour
                         setCable(ref CabelButton.coordinateHoles[0, CabelButton.currentEnd], ref CabelButton.coordinateHoles[1, CabelButton.currentEnd], ref CabelButton.coordinateHoles[0, CabelButton.currentEnd + 1], ref CabelButton.coordinateHoles[1, CabelButton.currentEnd + 1]);
                     else
                         setCable(ref CabelButton.coordinateHoles[0, CabelButton.currentEnd], ref CabelButton.coordinateHoles[1, CabelButton.currentEnd], ref CabelButton.coordinateHoles[0, CabelButton.currentEnd - 1], ref CabelButton.coordinateHoles[1, CabelButton.currentEnd - 1]);
+                    if (secondEnableButton.checkCables() == true) cablesConditionInscription.GetComponent<SpriteRenderer>().sprite = cablesAreRight;
+                    else cablesConditionInscription.GetComponent<SpriteRenderer>().sprite = cablesAreWrong;
                 }
             }
+        }
     }
 
     // Cable installation
