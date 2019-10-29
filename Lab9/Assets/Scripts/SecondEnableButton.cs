@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class SecondEnableButton : MonoBehaviour
 {
-    public bool enable = false, conditionCables = false;
+    public bool conditionCables = false;
+    public static bool enable = false;
     public float startAngleArrow = 0;
     public Sprite SecondButtonOn, SecondButtonOff;
     public CabelButton cabelButton;
-    public EngineButton engineButton;
+    public EngineScroll engineButton;
+    public GameObject slider;
     System.Random rnd = new System.Random();
 
     void OnMouseDown()
@@ -19,15 +21,14 @@ public class SecondEnableButton : MonoBehaviour
             enable = true;
             if (checkCables() == true && EnableButton.conditionButton == true)
             {
-                startAngleArrow *= -(26.31f/5.2631f);
-                EngineButton.startAngleArrow = startAngleArrow;
-                engineButton.Amperemeter.transform.rotation = Quaternion.Euler(0, 0, startAngleArrow - EngineButton.currentCounter * 0.05f);
+                startAngleArrow *= -5f;
+                EngineScroll.currentAngleArrow = startAngleArrow - EngineScroll.startValue;
+                engineButton.Amperemeter.transform.rotation = Quaternion.Euler(0, 0, EngineScroll.currentAngleArrow);
             }
         }
         else {
             GetComponent<SpriteRenderer>().sprite = SecondButtonOff;
             enable = false;
-            conditionCables = false;
             engineButton.Amperemeter.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
@@ -43,7 +44,7 @@ public class SecondEnableButton : MonoBehaviour
             else if (CabelButton.freeCableEnds[i] == false && CabelButton.freeCableEnds[i + 1] == true || CabelButton.freeCableEnds[i] == true && CabelButton.freeCableEnds[i + 1] == false)
                 return false;
         }
-        if (sumCablesInstalled == 5) conditionCables = true;
+        if (sumCablesInstalled == 5/* Only 5 cables must be installed */) conditionCables = true;
         else return false;
         for (int i = 0; i < sumCablesInstalled; ++i)
             for (int j = 0; j < engineButton.rightLengths.Length; ++j)
@@ -53,13 +54,13 @@ public class SecondEnableButton : MonoBehaviour
                     switch (j)
                     {
                         case 0: // G1
-                            startAngleArrow = (float)System.Math.Round(2.47f + (float)rnd.NextDouble() * 0.05f, 2);
+                            startAngleArrow = (float)System.Math.Round(2.47f + (float)rnd.NextDouble() * 1.1f, 2);
                             break;
                         case 1: // G1 with R
-                            startAngleArrow = (float)System.Math.Round(2.46f + (float)rnd.NextDouble() * 0.06f, 2);
+                            startAngleArrow = (float)System.Math.Round(2.46f + (float)rnd.NextDouble() * 1.0f, 2);
                             break;
                         case 2: // G2
-                            startAngleArrow = (float)System.Math.Round(1.66f + (float)rnd.NextDouble() * 0.03f, 2);
+                            startAngleArrow = (float)System.Math.Round(1.66f + (float)rnd.NextDouble() * 0.08f, 2);
                             break;
                     }
                     break;

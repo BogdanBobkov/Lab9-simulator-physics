@@ -6,7 +6,7 @@ public class EnableButton : MonoBehaviour
 {
     public Sprite lightred, lightblack, CabelButtonOff, CabelButtonOn;
     public GameObject lamp, CabelButton;
-    public EngineButton engineButton;
+    public EngineScroll engineButton;
     public static bool conditionButton = false;
 
     void OnMouseDown()
