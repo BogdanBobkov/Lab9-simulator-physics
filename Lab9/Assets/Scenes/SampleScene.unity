@@ -1514,14 +1514,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 885915872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639f5d2f2f9a0b44b9ccc590d6ae57bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cb47b42947dd9c43ba39f6d325f5f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCounter: 0
-  currentInteger: 0
   currentFractional: 0
-  cursorMode: 0
-  hotSpot: {x: 0, y: 0}
+  currentInteger: 0
   rightLengths:
   - 0.1110345
   - 0.1200835
@@ -1533,9 +1530,7 @@ MonoBehaviour:
   Amperemeter: {fileID: 1303305383}
   textInteger: {fileID: 1525658956}
   textFractional: {fileID: 1698603518}
-  CursorPointer: {fileID: 0}
-  secondEnableButton: {fileID: 1072427341}
-  scr: {fileID: 885915875}
+  slider: {fileID: 885915875}
 --- !u!114 &885915875
 MonoBehaviour:
   m_ObjectHideFlags: 0

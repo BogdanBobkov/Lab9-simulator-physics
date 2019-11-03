@@ -22,8 +22,8 @@ public class SecondEnableButton : MonoBehaviour
             if (checkCables() == true && EnableButton.conditionButton == true)
             {
                 startAngleArrow *= -5f;
-                EngineScroll.currentAngleArrow = startAngleArrow - EngineScroll.startValue;
-                engineButton.Amperemeter.transform.rotation = Quaternion.Euler(0, 0, EngineScroll.currentAngleArrow);
+                EngineScroll.currentAngleArrow = EngineScroll.startAngleArrow = startAngleArrow;
+                engineButton.Amperemeter.transform.rotation = Quaternion.Euler(0, 0, EngineScroll.currentAngleArrow + EngineScroll.startValue);
             }
         }
         else {
